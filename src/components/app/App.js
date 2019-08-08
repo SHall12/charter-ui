@@ -2,6 +2,7 @@ import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Header from '../header/Header';
+import Chord from '../chart/Chord'
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -25,6 +26,9 @@ function App(props) {
       <Header/>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+        <Chord/>
+        <Chord/>
+        <Chord/>
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
           ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum

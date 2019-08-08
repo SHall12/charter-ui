@@ -14,58 +14,52 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+// TODO: Fix this hovering over content
+const drawerWidth = 200;
+const useStyles = makeStyles(theme => ({
+    drawer: {
+        [theme.breakpoints.up('sm')]: {
+        width: drawerWidth,
+        flexShrink: 0,
+        },
+    },
+    appBar: {
+        marginLeft: drawerWidth,
+        [theme.breakpoints.up('sm')]: {
+        width: `calc(100% - ${drawerWidth}px)`,
+        },
+    },
+    menuButton: {
+        marginRight: theme.spacing(2),
+        [theme.breakpoints.up('sm')]: {
+        display: 'none',
+        },
+    },
+    toolbar: theme.mixins.toolbar,
+    drawerPaper: {
+        width: drawerWidth,
+    },
+}));
 
 
-function Header(props) {
+export default function Header(props) {
     const { container } = props;
     const classes = useStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
     function handleDrawerToggle() {
-    setMobileOpen(!mobileOpen);
+        setMobileOpen(!mobileOpen);
     }
-
-    const drawerWidth = 200;
-
-    const useStyles = makeStyles(theme => ({
-        root: {
-            display: 'flex',
-        },
-        drawer: {
-            [theme.breakpoints.up('sm')]: {
-            width: drawerWidth,
-            flexShrink: 0,
-            },
-        },
-        appBar: {
-            marginLeft: drawerWidth,
-            [theme.breakpoints.up('sm')]: {
-            width: `calc(100% - ${drawerWidth}px)`,
-            },
-        },
-        menuButton: {
-            marginRight: theme.spacing(2),
-            [theme.breakpoints.up('sm')]: {
-            display: 'none',
-            },
-        },
-        toolbar: theme.mixins.toolbar,
-        drawerPaper: {
-            width: drawerWidth,
-        },
-        content: {
-            flexGrow: 1,
-            padding: theme.spacing(3),
-        },
-    }));
 
     const drawer = (
         <div>
             <div className={classes.toolbar} />
             <Divider />
             <List>
-            {['My account', 'My Songs'].map((text, index) => (
+            {['Charts', 'Create Chart'].map((text, index) => (
                 <ListItem button key={text}>
                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                 <ListItemText primary={text} />
@@ -74,7 +68,7 @@ function Header(props) {
             </List>
             <Divider />
             <List>
-            {['Create song', 'Create chord'].map((text, index) => (
+            {['Account'].map((text, index) => (
                 <ListItem button key={text}>
                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                 <ListItemText primary={text} />
@@ -99,6 +93,12 @@ function Header(props) {
             <Typography variant="h6" noWrap>
             ChartR
             </Typography>
+            {/* TODO
+                    Add My Charts, Add Chart, and My Account always -> Collapse into ...
+                    Add Share, Save, Print when in editing chart -> Never collapses
+
+                    Make not responsive drawer
+             */}
         </Toolbar>
         <nav className={classes.drawer} aria-label="Mailbox folders">
             {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -134,5 +134,3 @@ function Header(props) {
     </AppBar>
   );
 }
-// TODO: Figure out JSX expressions must have one parent element and call this in app.js
-export default Header;
